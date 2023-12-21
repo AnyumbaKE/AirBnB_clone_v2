@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Module for place class"""
+
 from sqlalchemy.ext.declarative import declarative_base
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Table, String, Integer, Float, ForeignKey
