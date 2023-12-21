@@ -12,7 +12,6 @@ import os
 from models import storage
 from models.base_model import BaseModel
 
-
 class TestReview(unittest.TestCase):
 
     """Test Cases for the Review class."""
