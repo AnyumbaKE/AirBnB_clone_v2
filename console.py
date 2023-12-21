@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """Defines the HBnB console."""
+
+
 import cmd
 import re
 from shlex import split
@@ -202,8 +204,7 @@ class HBNBCommand(cmd.Cmd):
                     obj.__dict__[k] = valtype(v)
                 else:
                     obj.__dict__[k] = v
-
-storage.save()
+        storage.save()
 
 
 if __name__ == "__main__":
