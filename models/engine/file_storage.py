@@ -1,14 +1,7 @@
 #!/usr/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
-from datetime import datetime
 import json
-from models.base_model import BaseModel
-from models.user import User
-from models.place import Place
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.review import Review
+import shlex
 
 
 class FileStorage:
@@ -17,15 +10,21 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """Returns a dictionary of models currently in storage"""
-        if cls is None:
-            return FileStorage.__objects
+        """returns a dictionary
+        Return:
+            returns a dictionary of __object
+        """
+        dic = {}
+        if cls:
+            dictionary = self.__objects
+            for key in dictionary:
+                partition = key.replace('.', ' ')
+                partition = shlex.split(partition)
+                if (partition[0] == cls.__name__):
+                    dic[key] = self.__objects[key]
+            return (dic)
         else:
-            obj_dict = {}
-            for key, value in FileStorage.__objects.items():
-                if isinstance(value, cls):
-                    obj_dict[key] = value
-            return obj_dict
+            return self.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -40,8 +39,23 @@ class FileStorage:
                 temp[key] = val.to_dict()
             json.dump(temp, f)
 
+    def delete(self, obj=None):
+        """ delete an existing element
+        """
+        if obj:
+            key = "{}.{}".format(type(obj).__name__, obj.id)
+            del self.__objects[key]
+
     def reload(self):
         """Loads storage dictionary from file"""
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.place import Place
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.review import Review
+
         classes = {
             'BaseModel': BaseModel, 'User': User, 'Place': Place,
             'State': State, 'City': City, 'Amenity': Amenity,
@@ -57,12 +71,5 @@ class FileStorage:
             pass
 
     def close(self):
-        """display our HBNB data"""
+        '''calls reload() method for deserializing the JSON file to objects'''
         self.reload()
-
-    def delete(self, obj=None):
-        """delete an object"""
-        if obj is not None:
-            key = obj.__class__.__name__+'.'+obj.id
-            if key in self.__objects:
-                del self.__objects[key]
