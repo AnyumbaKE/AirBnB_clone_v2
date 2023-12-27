@@ -12,14 +12,13 @@
         </tr>
     </table>
 
-# Authors
-[Stan Anyumba](https://www.github.com/AnyumbaKE) </br>
-[Maggie Wangechi](https://www.github.com/QueenMaggie)
 
 The aim of the project is to develop a MySQL database for [AirBnb clone Project](https://github.com/AnyumbaKE/AirBnB_clone/tree/master)
 
-### By: Guillaume
 <table>
+        <tr>
+            <td>By: Guillaume</td>
+        </tr>
         <tr>
             <td>Weight: 2</td>
         </tr>
@@ -36,7 +35,11 @@ The aim of the project is to develop a MySQL database for [AirBnb clone Project]
             <td>An auto review will be launched at the deadline</td>
         </tr>
     </table>
- 
+    
+### Authors
+[Stan Anyumba](https://www.github.com/AnyumbaKE) </br>
+[Maggie Wangechi](https://www.github.com/QueenMaggie)
+
 ### Background Context
 Environment variables will be your best friend for this project!
 
