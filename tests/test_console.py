@@ -20,6 +20,7 @@ class TestConsole(unittest.TestCase):
     db = getenv(HBNB_TYPE_STORAGE, FILE)
     LOCAL_DB_NAME = 'file.json'
     CONSOLE_FILE = 'console.py'
+
     @classmethod
     def setUpClass(self) -> None:
         '''Test Class Setup'''
@@ -100,6 +101,7 @@ class TestConsole(unittest.TestCase):
         console.onecmd('all')
         stdout = self.capt_out.getvalue()
         self.assertTrue(isinstance(stdout, str))
+
     @unittest.skipIf(db == DB, 'Testing Database Storage Only')
     def test_show(self) -> None:
         '''Test show'''
