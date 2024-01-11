@@ -20,7 +20,7 @@ exec { '/usr/bin/env apt -y update' : }
 }
 -> file { '/data/web_static/releases/test/index.html':
   ensure  => 'present',
-  content => 'Testing web static deployment'
+  content => "Testing web static deployment"
 }
 -> file { '/data/web_static/current':
   ensure => 'link',
