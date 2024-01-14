@@ -71,7 +71,7 @@ def deploy():
     """
     Archives and deploys the static files to the host servers.
     """
-    file = do_pack()
-    if file is None:
+    archive_path = do_pack()
+    if archive_path is None:
         return False
-    return do_deploy(file)
+    return do_deploy(archive_path)
