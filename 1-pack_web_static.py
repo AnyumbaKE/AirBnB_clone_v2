@@ -3,18 +3,23 @@
 
 from datetime import datetime
 from fabric.api import local
-from fabric.decorators import runs_once
+import os.path
 
 
-@runs_once
 def do_pack():
-    """ This generates a tgz archive from web_static folder """
-    local("mkdir -p versions")
-    path = ("versions/web_static_{}.tgz"
-            .format(datetime.strftime(datetime.now(), "%Y%m%d%H%M%S")))
-    result = local("tar -cvzf {} web_static"
-                   .format(path))
-
-    if result.failed:
+    """Archives the static files."""
+    cur_time = datetime.now()
+    output = "versions/web_static_{}{}{}{}{}{}.tgz".format(
+        cur_time.year,
+        cur_time.month,
+        cur_time.day,
+        cur_time.hour,
+        cur_time.minute,
+        cur_time.second
+    )
+    if os.path.isdir("versions") is False:
+        if local("mkdir -p versions").failed is True:
+            return None
+    if local("tar -cvzf {} web_static".format(file)).failed is True:
         return None
-    return path
+    return output
