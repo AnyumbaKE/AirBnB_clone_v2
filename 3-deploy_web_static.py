@@ -8,7 +8,7 @@ from datetime import datetime
 from fabric.api import env, local, put, run
 
 
-env.hosts = ["54.236.17.135", "34.203.75.67"]
+env.hosts = ["54.237.218.228", "34.204.101.100"]
 
 
 def do_pack():
@@ -25,7 +25,7 @@ def do_pack():
     if os.path.isdir("versions") is False:
         if local("mkdir -p versions").failed is True:
             return None
-    if local("tar -cvzf {} web_static".format(file)).failed is True:
+    if local("tar -cvzf {} web_static".format(output)).failed is True:
         return None
     return output
 
