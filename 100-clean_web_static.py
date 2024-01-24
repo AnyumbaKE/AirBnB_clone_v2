@@ -7,15 +7,11 @@ import os
 from fabric.api import *
 
 
-env.hosts = ["54.236.17.135", "34.203.75.67"]
+env.hosts = ["54.237.218.228", "34.204.101.100"]
 
 
 def do_clean(number=0):
-    """
-    Deletes out-of-date archives of the static files.
-    Args:
-        number (Any): The number of archives to keep.
-    """
+    """Deletes out-of-date archives of the static files."""
 
     number = int(number)
 
