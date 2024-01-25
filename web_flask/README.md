@@ -31,13 +31,13 @@
 
 For this project, we expect you to look at this concept:
 
-AirBnB clone
+[AirBnB clone](https://intranet.alxswe.com/concepts/74)
 ## Resources
 ## Read or watch:
 
 - [What is a Web Framework?](https://intelegain-technologies.medium.com/what-are-web-frameworks-and-why-you-need-them-c4e8806bd0fb)
-A Minimal Application
-Routing (except “HTTP Methods”)
+- [A Minimal Application](https://flask.palletsprojects.com/en/2.3.x/quickstart/#a-minimal-application)
+- [Routing] (except “HTTP Methods”)
 Rendering Templates
 Synopsis
 Variables
