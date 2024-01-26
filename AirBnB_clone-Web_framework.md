@@ -1,15 +1,33 @@
-0x04. AirBnB clone - Web framework
-Python
-Back-end
-Webserver
-Flask
- By: Guillaume, CTO at Holberton School
- Weight: 2
- Project will start Jan 25, 2024 6:00 AM, must end by Jan 29, 2024 6:00 AM
- Checker will be released at Jan 26, 2024 6:00 AM
- Manual QA review must be done (request it when you are done with the project)
- An auto review will be launched at the deadline
-Concepts
+# 0x04. AirBnB clone - Web framework
+<table>
+<td>Python</td>
+<td>Back-end</td>
+<td>Webserver</td>
+<td>Flash</td>
+</table>
+<table>
+ <tr>
+  <td>By: Guillaume, CTO at Holberton School</td>
+ </tr>
+ <tr>
+  <td>Weight: 2</td>
+ </tr>
+ <tr>
+  <td>Project will start Jan 25, 2024 6:00 AM, must end by Jan 29, 2024 6:00 AM</td>
+ </tr>
+ <tr>
+  <td>Checker will be released at Jan 26, 2024 6:00 AM</td>
+ </tr>
+ <tr>
+  <td>Manual QA review must be done (request it when you are done with the project)</td>
+ </tr>
+ <tr>
+  <td>An auto review will be launched at the deadline</td>
+ </tr>
+</table>
+
+<i>Concepts</i>
+
 For this project, we expect you to look at this concept:
 
 AirBnB clone
