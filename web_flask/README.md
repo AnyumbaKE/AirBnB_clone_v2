@@ -94,7 +94,7 @@ Install Flask
 ```
 $ pip3 install Flask
 ```
-<img src="hbnb.png">
+<img src="readme_images/hbnb.png">
 
 ### Manual QA Review
 <b>It is your responsibility to request a review for this project from a peer before the project’s deadline. If no peers have been reviewed, you should request a review from a TA or staff member.</b>
@@ -313,24 +313,26 @@ Repo:
 
 Write a script that starts a Flask web application:
 
-Your web application must be listening on 0.0.0.0, port 5000
-Routes:
-/: display “Hello HBNB!”
-/hbnb: display “HBNB”
-/c/<text>: display “C ”, followed by the value of the text variable (replace underscore _ symbols with a space )
-/python/(<text>): display “Python ”, followed by the value of the text variable (replace underscore _ symbols with a space )
-The default value of text is “is cool”
-/number/<n>: display “n is a number” only if n is an integer
-/number_template/<n>: display a HTML page only if n is an integer:
-H1 tag: “Number: n” inside the tag BODY
-/number_odd_or_even/<n>: display a HTML page only if n is an integer:
-H1 tag: “Number: n is even|odd” inside the tag BODY
-You must use the option strict_slashes=False in your route definition
+- Your web application must be listening on 0.0.0.0, port 5000
+- Routes:
+    - /: display “Hello HBNB!”
+    - /hbnb: display “HBNB”
+    - /c/<text>: display “C ”, followed by the value of the text variable (replace underscore _ symbols with a space )
+    - /python/(<text>): display “Python ”, followed by the value of the text variable (replace underscore _ symbols with a space )
+        - The default value of text is “is cool”
+    - /number/<n>: display “n is a number” only if n is an integer
+    - /number_template/<n>: display a HTML page only if n is an integer:
+        - H1 tag: “Number: n” inside the tag BODY
+    - /number_odd_or_even/<n>: display a HTML page only if n is an integer:
+        - H1 tag: “Number: n is even|odd” inside the tag BODY
+- You must use the option strict_slashes=False in your route definition
+```
 guillaume@ubuntu:~/AirBnB_v2$ python3 -m web_flask.6-number_odd_or_even
 * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ....
+```
 In another tab:
-
+```
 guillaume@ubuntu:~$ curl 0.0.0.0:5000/number_odd_or_even/89 ; echo ""
 <!DOCTYPE html>
 <HTML lang="en">
@@ -357,25 +359,27 @@ guillaume@ubuntu:~$ curl 0.0.0.0:5000/number_odd_or_even/python
 <h1>Not Found</h1>
 <p>The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.</p>
 guillaume@ubuntu:~$ 
+```
 Repo:
 
-GitHub repository: AirBnB_clone_v2
-Directory: web_flask
-File: 6-number_odd_or_even.py, templates/6-number_odd_or_even.html
+- GitHub repository: AirBnB_clone_v2
+- Directory: web_flask
+- File: 6-number_odd_or_even.py, templates/6-number_odd_or_even.html
   
-7. Improve engines
-mandatory
+### 7. Improve engines
+
 Before using Flask to display our HBNB data, you will need to update some part of our engine:
 
 Update FileStorage: (models/engine/file_storage.py)
 
-Add a public method def close(self):: call reload() method for deserializing the JSON file to objects
+    - Add a public method def close(self):: call reload() method for deserializing the JSON file to objects
 Update DBStorage: (models/engine/db_storage.py)
 
-Add a public method def close(self):: call remove() method on the private session attribute (self.__session) tips or close() on the class Session tips
+    - Add a public method def close(self):: call remove() method on the private session attribute (self.__session) tips or close() on the class Session tips
 Update State: (models/state.py) - If it’s not already present
 
-If your storage engine is not DBStorage, add a public getter method cities to return the list of City objects from storage linked to the current State
+    - If your storage engine is not DBStorage, add a public getter method cities to return the list of City objects from storage linked to the current State
+```
 guillaume@ubuntu:~/AirBnB_v2$ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 
 >>> from models import storage
 >>> from models.state import State
@@ -384,13 +388,15 @@ guillaume@ubuntu:~/AirBnB_v2$ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_p
 >>> len(storage.all(State))
 5
 >>> # Time to insert new data!
+```
 At this moment, in another tab:
-
+```
 guillaume@ubuntu:~/AirBnB_v2$ echo 'INSERT INTO `states` VALUES ("421a55f1-7d82-45d9-b54c-a76916479545","2017-03-25 19:42:40","2017-03-25 19:42:40","Alabama");' | mysql -uroot -p hbnb_dev_db
 Enter password: 
 guillaume@ubuntu:~/AirBnB_v2$ 
+```
 And let’s go back the Python console:
-
+```
 >>> # Time to insert new data!
 >>> len(storage.all(State))
 5
@@ -400,8 +406,9 @@ And let’s go back the Python console:
 >>> len(storage.all(State))
 6
 >>> # perfect!
+```
 And for the getter cities in the State model:
-
+```
 guillaume@ubuntu:~/AirBnB_v2$ cat main.py
 #!/usr/bin/python3
 """
@@ -453,39 +460,43 @@ Find the city [City] (e3e36ded-fe56-44f5-bf08-8a27e2b30672) {'name': 'Napa', 'id
 Find the city [City] (12a58d70-e255-4c1e-8a68-7d5fb924d2d2) {'name': 'Sonoma', 'id': '12a58d70-e255-4c1e-8a68-7d5fb924d2d2', 'state_id': '5b8f1d55-e49c-44dd-ba6f-a3cf8489ae45', 'updated_at': datetime.datetime(2017, 12, 11, 19, 27, 52, 511513), 'created_at': datetime.datetime(2017, 12, 11, 19, 27, 52, 511432)} in the state [State] (5b8f1d55-e49c-44dd-ba6f-a3cf8489ae45) {'name': 'California', 'id': '5b8f1d55-e49c-44dd-ba6f-a3cf8489ae45', 'updated_at': datetime.datetime(2017, 12, 11, 19, 27, 52, 510038), 'created_at': datetime.datetime(2017, 12, 11, 19, 27, 52, 509950)}
 Find the city [City] (a693bdb9-e0ca-4521-adfd-e1a93c093b4b) {'name': 'Page', 'id': 'a693bdb9-e0ca-4521-adfd-e1a93c093b4b', 'state_id': 'a5e5311a-3c19-4995-9485-32c74411b416', 'updated_at': datetime.datetime(2017, 12, 11, 19, 27, 52, 512073), 'created_at': datetime.datetime(2017, 12, 11, 19, 27, 52, 511869)} in the state [State] (a5e5311a-3c19-4995-9485-32c74411b416) {'name': 'Arizona', 'id': 'a5e5311a-3c19-4995-9485-32c74411b416', 'updated_at': datetime.datetime(2017, 12, 11, 19, 27, 52, 510373), 'created_at': datetime.datetime(2017, 12, 11, 19, 27, 52, 510252)}
 guillaume@ubuntu:~/AirBnB_v2$ 
+```
 Repo:
 
-GitHub repository: AirBnB_clone_v2
-File: models/engine/file_storage.py, models/engine/db_storage.py, models/state.py
+- GitHub repository: AirBnB_clone_v2
+- File: models/engine/file_storage.py, models/engine/db_storage.py, models/state.py
  
-8. List of states
-mandatory
+### 8. List of states
+
 Write a script that starts a Flask web application:
 
-Your web application must be listening on 0.0.0.0, port 5000
-You must use storage for fetching data from the storage engine (FileStorage or DBStorage) => from models import storage and storage.all(...)
-After each request you must remove the current SQLAlchemy Session:
-Declare a method to handle @app.teardown_appcontext
-Call in this method storage.close()
-Routes:
-/states_list: display a HTML page: (inside the tag BODY)
-H1 tag: “States”
-UL tag: with the list of all State objects present in DBStorage sorted by name (A->Z) tip
-LI tag: description of one State: <state.id>: <B><state.name></B>
-Import this 7-dump to have some data
-You must use the option strict_slashes=False in your route definition
-IMPORTANT
+- Your web application must be listening on 0.0.0.0, port 5000
+- You must use storage for fetching data from the storage engine (FileStorage or DBStorage) => from models import storage and storage.all(...)
+- After each request you must remove the current SQLAlchemy Session:
+    - Declare a method to handle @app.teardown_appcontext
+    - Call in this method storage.close()
+- Routes:
+        - /states_list: display a HTML page: (inside the tag BODY)
+            - H1 tag: “States”
+            - UL tag: with the list of all State objects present in DBStorage sorted by name (A->Z) tip
+                - LI tag: description of one State: <state.id>: <B><state.name></B>
+- Import this 7-dump to have some data
+- You must use the option strict_slashes=False in your route definition
 
-Make sure you have a running and valid setup_mysql_dev.sql in your AirBnB_clone_v2 repository (Task)
-Make sure all tables are created when you run echo "quit" | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+<b>IMPORTANT</b>
+
+- Make sure you have a running and valid setup_mysql_dev.sql in your AirBnB_clone_v2 repository (Task)
+- Make sure all tables are created when you run echo "quit" | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+```
 guillaume@ubuntu:~/AirBnB_v2$ curl -o 7-dump.sql "https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/290/7-states_list.sql"
 guillaume@ubuntu:~/AirBnB_v2$ cat 7-dump.sql | mysql -uroot -p
 Enter password: 
 guillaume@ubuntu:~/AirBnB_v2$ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_flask.7-states_list
 * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ....
+```
 In another tab:
-
+```
 guillaume@ubuntu:~$ curl 0.0.0.0:5000/states_list ; echo ""
 <!DOCTYPE html>
 <HTML lang="en">
@@ -526,43 +537,47 @@ guillaume@ubuntu:~$ curl 0.0.0.0:5000/states_list ; echo ""
     </BODY>
 </HTML>
 guillaume@ubuntu:~$ 
+```
 Repo:
 
-GitHub repository: AirBnB_clone_v2
-File: web_flask/7-states_list.py, web_flask/templates/7-states_list.html
+- GitHub repository: AirBnB_clone_v2
+- File: web_flask/7-states_list.py, web_flask/templates/7-states_list.html
   
-9. Cities by states
-mandatory
+### 9. Cities by states
+
 Write a script that starts a Flask web application:
 
-Your web application must be listening on 0.0.0.0, port 5000
-You must use storage for fetching data from the storage engine (FileStorage or DBStorage) => from models import storage and storage.all(...)
-To load all cities of a State:
-If your storage engine is DBStorage, you must use cities relationship
-Otherwise, use the public getter method cities
-After each request you must remove the current SQLAlchemy Session:
-Declare a method to handle @app.teardown_appcontext
-Call in this method storage.close()
-Routes:
-/cities_by_states: display a HTML page: (inside the tag BODY)
-H1 tag: “States”
-UL tag: with the list of all State objects present in DBStorage sorted by name (A->Z) tip
-LI tag: description of one State: <state.id>: <B><state.name></B> + UL tag: with the list of City objects linked to the State sorted by name (A->Z)
-LI tag: description of one City: <city.id>: <B><city.name></B>
-Import this 7-dump to have some data
-You must use the option strict_slashes=False in your route definition
-IMPORTANT
+- Your web application must be listening on 0.0.0.0, port 5000
+- You must use storage for fetching data from the storage engine (FileStorage or DBStorage) => from models import storage and storage.all(...)
+- To load all cities of a State:
+    - If your storage engine is DBStorage, you must use cities relationship
+    - Otherwise, use the public getter method cities
+- After each request you must remove the current SQLAlchemy Session:
+    - Declare a method to handle @app.teardown_appcontext
+    - Call in this method storage.close()
+- Routes:
+    - /cities_by_states: display a HTML page: (inside the tag BODY)
+        - H1 tag: “States”
+        - UL tag: with the list of all State objects present in DBStorage sorted by name (A->Z) tip
+            - LI tag: description of one State: <state.id>: <B><state.name></B> + UL tag: with the list of City objects linked to the State sorted by name (A->Z)
+                - LI tag: description of one City: <city.id>: <B><city.name></B>
+- Import this [7-dump](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/290/7-states_list.sql) to have some data
+- You must use the option strict_slashes=False in your route definition
 
-Make sure you have a running and valid setup_mysql_dev.sql in your AirBnB_clone_v2 repository (Task)
-Make sure all tables are created when you run echo "quit" | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+<b>IMPORTANT</b>
+
+- Make sure you have a running and valid setup_mysql_dev.sql in your AirBnB_clone_v2 repository (Task)
+- Make sure all tables are created when you run echo "quit" | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+```
 guillaume@ubuntu:~/AirBnB_v2$ curl -o 7-dump.sql "https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/290/7-states_list.sql"
 guillaume@ubuntu:~/AirBnB_v2$ cat 7-dump.sql | mysql -uroot -p
 Enter password: 
 guillaume@ubuntu:~/AirBnB_v2$ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_flask.8-cities_by_states
 * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ....
+```
 In another tab:
-
+```
 guillaume@ubuntu:~$ curl 0.0.0.0:5000/cities_by_states ; echo ""
 <!DOCTYPE html>
 <HTML lang="en">
@@ -719,52 +734,56 @@ guillaume@ubuntu:~$ curl 0.0.0.0:5000/cities_by_states ; echo ""
     </BODY>
 </HTML>
 guillaume@ubuntu:~$ 
-
+```
+<img src="9.jpg">
 
 Repo:
 
-GitHub repository: AirBnB_clone_v2
-File: web_flask/8-cities_by_states.py, web_flask/templates/8-cities_by_states.html
+- GitHub repository: AirBnB_clone_v2
+- File: web_flask/8-cities_by_states.py, web_flask/templates/8-cities_by_states.html
   
-10. States and State
-mandatory
+### 10. States and State
+
 Write a script that starts a Flask web application:
 
-Your web application must be listening on 0.0.0.0, port 5000
-You must use storage for fetching data from the storage engine (FileStorage or DBStorage) => from models import storage and storage.all(...)
-To load all cities of a State:
-If your storage engine is DBStorage, you must use cities relationship
-Otherwise, use the public getter method cities
-After each request you must remove the current SQLAlchemy Session:
-Declare a method to handle @app.teardown_appcontext
-Call in this method storage.close()
-Routes:
-/states: display a HTML page: (inside the tag BODY)
-H1 tag: “States”
-UL tag: with the list of all State objects present in DBStorage sorted by name (A->Z) tip
-LI tag: description of one State: <state.id>: <B><state.name></B>
-/states/<id>: display a HTML page: (inside the tag BODY)
-If a State object is found with this id:
-H1 tag: “State: ”
-H3 tag: “Cities:”
-UL tag: with the list of City objects linked to the State sorted by name (A->Z)
-LI tag: description of one City: <city.id>: <B><city.name></B>
-Otherwise:
-H1 tag: “Not found!”
-You must use the option strict_slashes=False in your route definition
-Import this 7-dump to have some data
-IMPORTANT
+- Your web application must be listening on 0.0.0.0, port 5000
+- You must use storage for fetching data from the storage engine (FileStorage or DBStorage) => from models import storage and storage.all(...)
+- To load all cities of a State:
+    - If your storage engine is DBStorage, you must use cities relationship
+    - Otherwise, use the public getter method cities
+- After each request you must remove the current SQLAlchemy Session:
+    - Declare a method to handle @app.teardown_appcontext
+    - Call in this method storage.close()
+- Routes:
+    - /states: display a HTML page: (inside the tag BODY)
+        - H1 tag: “States”
+        - UL tag: with the list of all State objects present in DBStorage sorted by name (A->Z) tip
+            - LI tag: description of one State: <state.id>: <B><state.name></B>
+    - /states/<id>: display a HTML page: (inside the tag BODY)
+        - If a State object is found with this id:
+            - H1 tag: “State: ”
+            - H3 tag: “Cities:”
+            - UL tag: with the list of City objects linked to the State sorted by name (A->Z)
+                - LI tag: description of one City: <city.id>: <B><city.name></B>
+            - Otherwise:
+                - H1 tag: “Not found!”
+- You must use the option strict_slashes=False in your route definition
+- Import this [7-dump](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/290/7-states_list.sql) to have some data
 
-Make sure you have a running and valid setup_mysql_dev.sql in your AirBnB_clone_v2 repository (Task)
-Make sure all tables are created when you run echo "quit" | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+<b>IMPORTANT</b>
+
+- Make sure you have a running and valid setup_mysql_dev.sql in your AirBnB_clone_v2 repository (Task)
+- Make sure all tables are created when you run echo "quit" | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+```
 guillaume@ubuntu:~/AirBnB_v2$ curl -o 7-dump.sql "https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/290/7-states_list.sql"
 guillaume@ubuntu:~/AirBnB_v2$ cat 7-dump.sql | mysql -uroot -p
 Enter password: 
 guillaume@ubuntu:~/AirBnB_v2$ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_flask.9-states
 * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ....
+```
 In another tab:
-
+```
 guillaume@ubuntu:~$ curl 0.0.0.0:5000/states ; echo ""
 <!DOCTYPE html>
 <HTML lang="en">
@@ -843,91 +862,108 @@ guillaume@ubuntu:~$ curl 0.0.0.0:5000/states/holberton ; echo ""
     </BODY>
 </HTML>
 guillaume@ubuntu:~$ 
+```
 Repo:
 
-GitHub repository: AirBnB_clone_v2
-File: web_flask/9-states.py, web_flask/templates/9-states.html
+- GitHub repository: AirBnB_clone_v2
+- File: web_flask/9-states.py, web_flask/templates/9-states.html
   
-11. HBNB filters
-mandatory
+### 11. HBNB filters
+
 Write a script that starts a Flask web application:
 
-Your web application must be listening on 0.0.0.0, port 5000
-You must use storage for fetching data from the storage engine (FileStorage or DBStorage) => from models import storage and storage.all(...)
-To load all cities of a State:
-If your storage engine is DBStorage, you must use cities relationship
-Otherwise, use the public getter method cities
-After each request you must remove the current SQLAlchemy Session:
-Declare a method to handle @app.teardown_appcontext
-Call in this method storage.close()
-Routes:
-/hbnb_filters: display a HTML page like 6-index.html, which was done during the project 0x01. AirBnB clone - Web static
-Copy files 3-footer.css, 3-header.css, 4-common.css and 6-filters.css from web_static/styles/ to the folder web_flask/static/styles
-Copy files icon.png and logo.png from web_static/images/ to the folder web_flask/static/images
-Update .popover class in 6-filters.css to allow scrolling in the popover and a max height of 300 pixels.
-Use 6-index.html content as source code for the template 10-hbnb_filters.html:
-Replace the content of the H4 tag under each filter title (H3 States and H3 Amenities) by &nbsp;
-State, City and Amenity objects must be loaded from DBStorage and sorted by name (A->Z)
-You must use the option strict_slashes=False in your route definition
-Import this 10-dump to have some data
-IMPORTANT
+- Your web application must be listening on 0.0.0.0, port 5000
+- You must use storage for fetching data from the storage engine (FileStorage or DBStorage) => from models import storage and storage.all(...)
+- To load all cities of a State:
+    - If your storage engine is DBStorage, you must use cities relationship
+    - Otherwise, use the public getter method cities
+- After each request you must remove the current SQLAlchemy Session:
+    - Declare a method to handle @app.teardown_appcontext
+    - Call in this method storage.close()
+- Routes:
+    - /hbnb_filters: display a HTML page like 6-index.html, which was done during the project 0x01. AirBnB clone - Web static
+        - Copy files 3-footer.css, 3-header.css, 4-common.css and 6-filters.css from web_static/styles/ to the folder web_flask/static/styles
+        - Copy files icon.png and logo.png from web_static/images/ to the folder web_flask/static/images
+        - Update .popover class in 6-filters.css to allow scrolling in the popover and a max height of 300 pixels.
+        - Use 6-index.html content as source code for the template 10-hbnb_filters.html:
+            - Replace the content of the H4 tag under each filter title (H3 States and H3 Amenities) by &nbsp;
+        - State, City and Amenity objects must be loaded from DBStorage and <b>sorted by name</b> (A->Z)
+- You must use the option strict_slashes=False in your route definition
+- Import this [10-dump to](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/290/10-hbnb_filters.sql) have some data
 
-Make sure you have a running and valid setup_mysql_dev.sql in your AirBnB_clone_v2 repository (Task)
-Make sure all tables are created when you run echo "quit" | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+<b>IMPORTANT</b>
+
+- Make sure you have a running and valid setup_mysql_dev.sql in your AirBnB_clone_v2 repository ([Task](https://intranet.alxswe.com/tasks/1609))
+- Make sure all tables are created when you run echo "quit" | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+```
 guillaume@ubuntu:~/AirBnB_v2$ curl -o 10-dump.sql "https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/290/10-hbnb_filters.sql"
 guillaume@ubuntu:~/AirBnB_v2$ cat 10-dump.sql | mysql -uroot -p
 Enter password: 
 guillaume@ubuntu:~/AirBnB_v2$ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_flask.10-hbnb_filters
 * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ....
+```
 In the browser:
+<img src="readme_images/11_1.jpg"><br />
 
-   
+ <img src="readme_images/11_2.jpg"><br /> 
+
+<img src="readme_images/11_3.jpg"><br /> 
+
+<img src="readme_images/11_4.jpg"><br />
 
 Repo:
 
-GitHub repository: AirBnB_clone_v2
-File: web_flask/10-hbnb_filters.py, web_flask/templates/10-hbnb_filters.html, web_flask/static/
+- GitHub repository: AirBnB_clone_v2
+- File: web_flask/10-hbnb_filters.py, web_flask/templates/10-hbnb_filters.html, web_flask/static/
  
-12. HBNB is alive!
-#advanced
+### 12. HBNB is alive!
+
 Write a script that starts a Flask web application:
 
-Your web application must be listening on 0.0.0.0, port 5000
-You must use storage for fetching data from the storage engine (FileStorage or DBStorage) => from models import storage and storage.all(...)
-To load all cities of a State:
-If your storage engine is DBStorage, you must use cities relationship
-Otherwise, use the public getter method cities
-After each request you must remove the current SQLAlchemy Session:
-Declare a method to handle @app.teardown_appcontext
-Call in this method storage.close()
-Routes:
-/hbnb: display a HTML page like 8-index.html, done during the 0x01. AirBnB clone - Web static project
-Copy files 3-footer.css, 3-header.css, 4-common.css, 6-filters.css and 8-places.css from web_static/styles/ to the folder web_flask/static/styles
-Copy all files from web_static/images/ to the folder web_flask/static/images
-Update .popover class in 6-filters.css to enable scrolling in the popover and set max height to 300 pixels.
-Update 8-places.css to always have the price by night on the top right of each place element, and the name correctly aligned and visible (i.e. screenshots below)
-Use 8-index.html content as source code for the template 100-hbnb.html:
-Replace the content of the H4 tag under each filter title (H3 States and H3 Amenities) by &nbsp;
-Make sure all HTML tags from objects are correctly used (example: <BR /> must generate a new line)
-State, City, Amenity and Place objects must be loaded from DBStorage and sorted by name (A->Z)
-You must use the option strict_slashes=False in your route definition
-Import this 100-dump to have some data
-IMPORTANT
+- Your web application must be listening on 0.0.0.0, port 5000
+- You must use storage for fetching data from the storage engine (FileStorage or DBStorage) => from models import storage and storage.all(...)
+- To load all cities of a State:
+    - If your storage engine is DBStorage, you must use cities relationship
+    - Otherwise, use the public getter method cities
+- After each request you must remove the current SQLAlchemy Session:
+    - Declare a method to handle @app.teardown_appcontext
+    - Call in this method storage.close()
+- Routes:
+    - /hbnb: display a HTML page like 8-index.html, done during the 0x01. AirBnB clone - Web static project
+        - Copy files 3-footer.css, 3-header.css, 4-common.css, 6-filters.css and 8-places.css from web_static/styles/ to the folder web_flask/static/styles
+        - Copy all files from web_static/images/ to the folder web_flask/static/images
+        - Update .popover class in 6-filters.css to enable scrolling in the popover and set max height to 300 pixels.
+        - Update 8-places.css to always have the price by night on the top right of each place element, and the name correctly aligned and visible (i.e. screenshots below)
+        - Use 8-index.html content as source code for the template 100-hbnb.html:
+            - Replace the content of the H4 tag under each filter title (H3 States and H3 Amenities) by &nbsp;
+            - Make sure all HTML tags from objects are correctly used (example: <BR /> must generate a new line)
+        - State, City, Amenity and Place objects must be loaded from DBStorage and <b>sorted by name</b> (A->Z)
+- You must use the option strict_slashes=False in your route definition
+- Import this [100-dump]() to have some data
 
-Make sure you have a running and valid setup_mysql_dev.sql in your AirBnB_clone_v2 repository (Task)
-Make sure all tables are created when you run echo "quit" | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+<b>IMPORTANT</b>
+
+- Make sure you have a running and valid setup_mysql_dev.sql in your AirBnB_clone_v2 repository ([Task](https://intranet.alxswe.com/tasks/1609))
+- Make sure all tables are created when you run echo "quit" | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+```
 guillaume@ubuntu:~/AirBnB_v2$ curl -o 100-dump.sql "https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/290/100-hbnb.sql"
 guillaume@ubuntu:~/AirBnB_v2$ cat 100-dump.sql | mysql -uroot -p
 Enter password: 
 guillaume@ubuntu:~/AirBnB_v2$ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_flask.100-hbnb
 * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ....
+```
 In the browser:
+<img src="readme_images/12_1.jpg"><br />
+<img src="readme_images/12_2.jpg"><br />
+<img src="readme_images/12_3.jpg"><br />
+<img src="readme_images/12_4.jpg"><br />
+<img src="readme_images/12_5.jpg"><br />
 
     
 
 Repo:
 
-GitHub repository: AirBnB_clone_v2
-File: web_flask/100-hbnb.py, web_flask/templates/100-hbnb.html, web_flask/static/
+- GitHub repository: AirBnB_clone_v2
+- File: web_flask/100-hbnb.py, web_flask/templates/100-hbnb.html, web_flask/static/
