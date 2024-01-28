@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" 
+"""
 A script that starts a Flask web application:
 
 And web application must be listening on 0.0.0.0, port 5000
@@ -22,7 +22,7 @@ def states_list():
 
 @app.teardown_appcontext
 def teardown(exc):
-    """ 
+    """
     remove the current SQLAlchemy Session.
     """
     storage.close()
