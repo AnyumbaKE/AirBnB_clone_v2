@@ -18,10 +18,10 @@ def hbnb():
     """return HBNB"""
     return "HBNB"
 
+
 @app.route('/c/<text>', strict_slashes=False)
 def c_is_fun(text):
-    """Return reformatted text
-    """
+    """Returns C followed by by the value of the text"""
     return 'C ' + text.replace('_', ' ')
 
 
