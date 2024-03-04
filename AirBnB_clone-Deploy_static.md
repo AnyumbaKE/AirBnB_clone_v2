@@ -1,4 +1,4 @@
-0x03. AirBnB clone - Deploy static
+# 0x03. AirBnB clone - Deploy static
 DevOps
 Python
 SysAdmin
@@ -8,18 +8,14 @@ CI/CD
  Weight: 1
  Project over - took place from Jan 10, 2024 6:00 AM to Jan 12, 2024 6:00 AM
  An auto review will be launched at the deadline
-In a nutshell…
-Auto QA review: 39.0/51 mandatory & 6.5/35 optional
-Altogether:  90.67%
-Mandatory: 76.47%
-Optional: 18.57%
-Calculation:  76.47% + (76.47% * 18.57%)  == 90.67%
-Concepts
+
+<i>Concepts</i>
 For this project, we expect you to look at these concepts:
 
-CI/CD
-AirBnB clone
-Background Context
+- CI/CD
+- AirBnB clone
+
+## Background Context
 Ever since you completed project 0x0F. Load balancer of the SysAdmin track, you’ve had 2 web servers + 1 load balancer but nothing to distribute with them.
 
 It’s time to make your work public!
@@ -30,7 +26,7 @@ Before starting, please fork the repository AirBnB_clone_v2 from your partner if
 
 
 
-Resources
+## Resources
 Read or watch:
 
 How to use Fabric
@@ -81,7 +77,9 @@ Your Bash script must pass Shellcheck (version 0.3.3-1~ubuntu20.04.1 via apt-get
 The first line of all your Bash scripts should be exactly #!/usr/bin/env bash
 The second line of all your Bash scripts should be a comment explaining what is the script doing
 More Info
+
 Install Fabric for Python 3 - version 1.14.post1
+```
 $ pip3 uninstall Fabric
 $ sudo apt-get install libffi-dev
 $ sudo apt-get install libssl-dev
@@ -95,12 +93,13 @@ $ pip3 install cryptography==2.8
 $ pip3 install bcrypt==3.1.7
 $ pip3 install PyNaCl==1.3.0
 $ pip3 install Fabric3==1.14.post1
+```
 Video library(1 total)
 Search by title
 Deploy static files with Fabric
 Quiz questions
 Great! You've completed the quiz successfully! Keep going! (Show quiz)
-Tasks
+## Tasks
 0. Prepare your web servers
 mandatory
 Score: 100.0% (Checks completed: 100.0%)
