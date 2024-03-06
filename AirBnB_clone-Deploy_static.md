@@ -100,8 +100,7 @@ Deploy static files with Fabric
 Quiz questions
 Great! You've completed the quiz successfully! Keep going! (Show quiz)
 ## Tasks
-0. Prepare your web servers
-mandatory
+### 0. Prepare your web servers
 Score: 100.0% (Checks completed: 100.0%)
 Write a Bash script that sets up your web servers for the deployment of web_static. It must:
 
@@ -120,7 +119,7 @@ Tip
 Your program should always exit successfully. Don’t forget to run your script on both of your web servers.
 
 In optional, you will redo this task but by using Puppet
-
+```
 ubuntu@89-web-01:~/$ sudo ./0-setup_web_static.sh
 ubuntu@89-web-01:~/$ echo $?
 0
@@ -151,6 +150,7 @@ ubuntu@89-web-01:~/$ curl localhost/hbnb_static/index.html
   </body>
 </html>
 ubuntu@89-web-01:~/$ 
+```
 Repo:
 
 GitHub repository: AirBnB_clone_v2
